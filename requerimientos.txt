@@ -2,6 +2,6 @@ OK - Listado de actores mostrando en que películas han participado. Indicar el 
 (Tablas: actor, film_actor, film)(Usar Client)
 OK - Listado de películas con sus categorías, entiéndase que una película puede tener asociadas varias categorías. 
 (Usar Pool)
-- Listado de películas con su respectivo idioma. 
+OK - Listado de películas con su respectivo idioma. 
 (Usar Client con cursor, y hacer un primer read con 10 registros, luego otro con 5 y luego otro con 20)
 (Tablas: film, language)
