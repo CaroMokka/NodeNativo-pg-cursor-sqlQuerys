@@ -11,14 +11,14 @@ const client = new Client({
   port: 5432,
 });
 
-// const pool = new Pool({
-//   user: "postgres",
-//   password: "postgres",
-//   host: "localhost",
-//   database: "dvdrental",
-//   port: 5432,
-//   idleTimeoutMillis: 3_000,
-// });
+const pool = new Pool({
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  database: "dvdrental",
+  port: 5432,
+  idleTimeoutMillis: 3_000,
+});
 
 //REQUERIMIENTO - 1
 async function obtenerActoresConFilms() {
@@ -65,7 +65,7 @@ async function obtenerPeliculasConCategoria() {
         ORDER BY
         f.title, c.name;
         `);
-    console.log(res.rows);
+    return res.rows
   } catch (err) {
     console.error("Error al ejecutar la consulta:", err);
   }
@@ -104,20 +104,25 @@ async function obtenerFilmsConIdiomas() {
       });
     }
     try {
+    const peliculasIdiomas = [] 
     const rows1 = await lecturaCursor(10);
-    console.log("Primera lectura de filas:", rows1);
+    //console.log("Primera lectura de filas:", rows1);
+    peliculasIdiomas.push(rows1)
     if (rows1.length > 0) {
       const rows2 = await lecturaCursor(5);
-      console.log("Segunda lectura de filas:", rows2);
+      //console.log("Segunda lectura de filas:", rows2);
+      peliculasIdiomas.push(rows2)
       if (rows2.length > 0) {
         const rows3 = await lecturaCursor(20);
-        console.log("Tercera lectura de filas:", rows3);
+        //console.log("Tercera lectura de filas:", rows3);
+        peliculasIdiomas.push(rows3)
       } else {
         console.log("No hay suficientes filas para una tercera lectura");
       }
     } else {
       console.log("No hay suficientes filas para una segunda lectura");
     }
+    return peliculasIdiomas
   } catch (err) {
     console.error("Error al ejecutar la consulta:", err);
   } finally {
