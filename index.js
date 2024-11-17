@@ -35,7 +35,7 @@ createServer(async (req, res) => {
       );
     }
     if(path == "/peliculas/idiomas"){
-      const result = (await obtenerFilmsConIdiomas()).flat()
+      const result = await obtenerFilmsConIdiomas()
       return res.end(JSON.stringify({ message: "Listado de películas con su respectivo idioma", data: result }))
     }
   }

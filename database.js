@@ -104,7 +104,7 @@ async function obtenerFilmsConIdiomas() {
       });
     }
     try {
-    const peliculasIdiomas = [] 
+    //const peliculasIdiomas = [] 
     const rows1 = await lecturaCursor(10);
     //console.log("Primera lectura de filas:", rows1);
     peliculasIdiomas.push(rows1)
@@ -122,7 +122,7 @@ async function obtenerFilmsConIdiomas() {
     } else {
       console.log("No hay suficientes filas para una segunda lectura");
     }
-    return peliculasIdiomas
+    return [...rows1, ...rows2, ...rows3]
   } catch (err) {
     console.error("Error al ejecutar la consulta:", err);
   } finally {
